@@ -2,12 +2,11 @@ package aula03;
 
 public class Conta {
     int numero;
-    String titular;
-    String cpf;
     double saldo;
+    Cliente titular;
     
     void visualizarSaldo(){
-        System.out.println("Saldo= " + this.saldo);
+        System.out.println("Saldo = " + this.saldo);
     }
     
     void depositar(double valor){
@@ -16,15 +15,22 @@ public class Conta {
         }
     }
     
-    void sacar(double value){
-        if (value <= this.saldo) {
-           this.saldo = this.saldo - value;
+    boolean sacar(double value){
+        if (this.saldo < value) {
+           return false;
         } else {
-            System.out.println("Quer um emprestimo?");
+           this.saldo = this.saldo - value;
+           return true;
         }
     }
     
-    void transferirDinheiro(){
-        
+    void transferirPara(double valor, Conta c){
+        if (this.saldo >= valor){
+            this.saldo = this.saldo - valor;
+            c.saldo = c.saldo + valor;
+            System.out.println("Transferencia realizada com sucesso"); 
+        } else {
+            System.out.println("Nao foi possivel");   
+            }
+        }
     }
-}
